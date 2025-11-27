@@ -1,0 +1,55 @@
+/* TŁO */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Segoe UI", sans-serif;
+  background: radial-gradient(circle at top, #e0f2fe, #eef2ff 40%, #f8fafc 100%);
+}
+
+/* GŁÓWNY KONTENER */
+.App {
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* GRID APLIKACJI */
+.grid-container {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 20px;
+}
+
+/* LEWY PANEL */
+.item1 {
+  background: #0f172a;
+  color: #e5e7eb;
+  padding: 20px;
+  border-radius: 16px;
+}
+
+/* KARTY */
+.item2,
+.item3,
+.item4 {
+  background: white;
+  padding: 20px;
+  border-radius: 14px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+}
+
+/* FORMULARZ GRID 3 KOLUMNY */
+.form-grid {
+  display: grid;
+  grid-template-columns: 140px 1fr 1fr;
+  gap: 10px 16px;
+  align-items: center;
+}
+
+.form-grid input,
+.form-grid select {
+  width: 100%;
+  padding: 6px;
+  border-radius: 6px;
+  border: 1px solid #cbd5e1;
+}

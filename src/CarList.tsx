@@ -2,7 +2,6 @@ import {Car} from './Car';
 import {Button, EditableText} from "@blueprintjs/core"
 
 interface Props {  
-  // typ właściwości komponentu przekazywanych z komponentu nadrzędnego
   cars: Car[];
   handleSelectCar: (id: any) => void;
   handleDeleteCar: (id: any) => void;
@@ -10,20 +9,7 @@ interface Props {
 
 export default function CarList({cars, handleSelectCar, handleDeleteCar} : Props){
     return (
-        // <ul>
-        //     {cars.map((car: Car) => (
-        //     <li key={car.id}>
-        //         <div>Marka: {car.brand}</div>
-        //         <div>Model: {car.model}</div>
-        //         <button onClick={() => handleSelectCar(car.id)}>
-        //             Szczygóły
-        //         </button>
-        //         <button onClick={() => handleDeleteCar(car.id)}>
-        //             Zezłomuj
-        //         </button>
-        //     </li>
-        //     ))}
-        // </ul>
+       
         <div>
         <table className="bp4-html-table .modifier">
         <thead>

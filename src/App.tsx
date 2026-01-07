@@ -7,10 +7,13 @@ import CarDetails from "./CarDetails";
 import CarAdd from "./CarAdd";
 import CarUpdate from "./CarUpdate";
 
+import { Routes, Route, Link } from "react-router-dom";
+import Login from "./Login";
+import Register from "./Register";
+
 const endpoint = axios.create({
   baseURL: "https://localhost:7188/api/Cars",
 });
-
 
 function createDefaultCar(): Car {
   return {
@@ -27,12 +30,11 @@ function createDefaultCar(): Car {
   };
 }
 
-const App: React.FC = () => {
+const CarsApp: React.FC = () => {
   const [cars, setCars] = useState<Car[]>([]);
   const [newCar, setNewCar] = useState<Car>(createDefaultCar());
   const [updateCar, setUpdateCar] = useState<Car | undefined>(undefined);
   const [selectedCar, setSelectedCar] = useState<Car | undefined>(undefined);
-
 
   useEffect(() => {
     endpoint
@@ -55,10 +57,8 @@ const App: React.FC = () => {
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
     const { name, value } = e.target;
-
     let castValue: string | number = value;
 
-  
     if (
       name === "doorsNumber" ||
       name === "luggageCapacity" ||
@@ -84,10 +84,7 @@ const App: React.FC = () => {
       return;
     }
 
-    endpoint
-      .post("", newCar)
-      .then((response) => console.log(response))
-      .catch((error) => console.error(error));
+    endpoint.post("", newCar).catch((error) => console.error(error));
 
     setCars((prev) => [...prev, newCar]);
     setNewCar(createDefaultCar());
@@ -96,7 +93,6 @@ const App: React.FC = () => {
   const handleCancelUpdateCar = () => {
     setUpdateCar(undefined);
   };
-
 
   const handleUpdateChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -125,7 +121,6 @@ const App: React.FC = () => {
     );
   };
 
-  // zapis edycji auta
   const handleUpdateCar = () => {
     if (!updateCar) return;
 
@@ -133,78 +128,88 @@ const App: React.FC = () => {
       prev.map((car) => (car.id === updateCar.id ? updateCar : car))
     );
 
-    endpoint
-      .patch(`${updateCar.id}`, updateCar)
-      .then((response) => console.log(response))
-      .catch((error) => console.error(error));
+    endpoint.patch(`${updateCar.id}`, updateCar).catch((error) => console.error(error));
 
     setSelectedCar(undefined);
     setUpdateCar(undefined);
   };
 
-  // usunięcie auta
   const handleDeleteCar = (id: string) => {
     setCars((prev) => prev.filter((car) => car.id !== id));
-
-    endpoint
-      .delete(`${id}`)
-      .then((response) => console.log(response))
-      .catch((error) => console.error(error));
+    endpoint.delete(`${id}`).catch((error) => console.error(error));
   };
 
   return (
-    <div className="App grid-container">
-      {/* LEWA KOLUMNA – lista aut */}
-      <div className="item1">
-        <h2>Moja flota pojazdów</h2>
-        <p className="summary">W bazie: {cars.length} aut</p>
-
-        <CarList
-          cars={cars}
-          handleSelectCar={handleSelectCar}
-          handleDeleteCar={handleDeleteCar}
-        />
+    <>
+      <div style={{ padding: 10 }}>
+        <Link to="/login" style={{ marginRight: 12 }}>
+          Logowanie
+        </Link>
+        <Link to="/register" style={{ marginRight: 12 }}>
+          Rejestracja
+        </Link>
+        <Link to="/">Auta</Link>
       </div>
 
-      {/* GÓRNA KARTA – dodawanie */}
-      <div className="item2">
-  <h2>Dodaj nowy pojazd</h2>
-  <h4>ID generowane lokalnie: {newCar.id}</h4>
+      <div className="App grid-container">
+        <div className="item1">
+          <h2>Moja flota pojazdów</h2>
+          <p className="summary">W bazie: {cars.length} aut</p>
 
-  <CarAdd newCar={newCar} handleChangeAdd={handleAddChange} />
-
-  <h4>
-    <Button onClick={handleAddCar} intent="success">
-      Dodaj do bazy
-    </Button>
-  </h4>
-</div>
-
-      {/* ŚRODKOWA KARTA – szczegóły */}
-      <div className="item3">
-        <h2>Szczegóły wybranego auta</h2>
-        {selectedCar && (
-          <CarDetails
-            car={selectedCar}
-            setUpdateCar={setUpdateCar}
-            cancelSelectedCar={handleCancelSelectedCar}
+          <CarList
+            cars={cars}
+            handleSelectCar={handleSelectCar}
+            handleDeleteCar={handleDeleteCar}
           />
-        )}
-      </div>
+        </div>
 
-      {/* DOLNA KARTA – edycja */}
-      <div className="item4">
-        <h2>Edycja danych pojazdu</h2>
-        {selectedCar && updateCar && (
-          <CarUpdate
-            updateCar={updateCar}
-            handleUpdateCar={handleUpdateCar}
-            handleUpdateChange={handleUpdateChange}
-            handleCancelUpdateCar={handleCancelUpdateCar}
-          />
-        )}
+        <div className="item2">
+          <h2>Dodaj nowy pojazd</h2>
+          <h4>ID generowane lokalnie: {newCar.id}</h4>
+
+          <CarAdd newCar={newCar} handleChangeAdd={handleAddChange} />
+
+          <h4>
+            <Button onClick={handleAddCar} intent="success">
+              Dodaj do bazy
+            </Button>
+          </h4>
+        </div>
+
+        <div className="item3">
+          <h2>Szczegóły wybranego auta</h2>
+          {selectedCar && (
+            <CarDetails
+              car={selectedCar}
+              setUpdateCar={setUpdateCar}
+              cancelSelectedCar={handleCancelSelectedCar}
+            />
+          )}
+        </div>
+
+        <div className="item4">
+          <h2>Edycja danych pojazdu</h2>
+          {selectedCar && updateCar && (
+            <CarUpdate
+              updateCar={updateCar}
+              handleUpdateCar={handleUpdateCar}
+              handleUpdateChange={handleUpdateChange}
+              handleCancelUpdateCar={handleCancelUpdateCar}
+            />
+          )}
+        </div>
       </div>
-    </div>
+    </>
+  );
+};
+
+const App: React.FC = () => {
+  return (
+    <Routes>
+      <Route path="/" element={<CarsApp />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/register" element={<Register />} />
+    </Routes>
   );
 };
 

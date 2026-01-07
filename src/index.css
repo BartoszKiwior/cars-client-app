@@ -5,22 +5,17 @@ body {
   font-family: "Segoe UI", sans-serif;
   background: radial-gradient(circle at top, #e0f2fe, #eef2ff 40%, #f8fafc 100%);
 }
-
-/* GŁÓWNY KONTENER */
 .App {
   max-width: 1300px;
   margin: 0 auto;
   padding: 20px;
 }
-
-/* GRID APLIKACJI */
 .grid-container {
   display: grid;
   grid-template-columns: 260px 1fr;
   gap: 20px;
 }
 
-/* LEWY PANEL */
 .item1 {
   background: #0f172a;
   color: #e5e7eb;
@@ -38,7 +33,7 @@ body {
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
 }
 
-/* FORMULARZ GRID 3 KOLUMNY */
+
 .form-grid {
   display: grid;
   grid-template-columns: 140px 1fr 1fr;

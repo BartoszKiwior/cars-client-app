@@ -1,6 +1,4 @@
-/* =============================
-   GLOBALNE TŁO + FONT
-============================= */
+
 body {
   margin: 0;
   padding: 0;
@@ -17,9 +15,7 @@ body {
   box-sizing: border-box;
 }
 
-/* =============================
-   UKŁAD GRID
-============================= */
+
 .grid-container {
   display: grid;
   grid-template-columns: 260px 1fr;
@@ -28,9 +24,6 @@ body {
   min-height: calc(100vh - 60px);
 }
 
-/* =============================
-   LEWA KOLUMNA – PANEL
-============================= */
 .item1 {
   grid-row: 1 / span 3;
   background: linear-gradient(180deg, #0f172a, #111827);
@@ -77,10 +70,6 @@ body {
   transform: translateY(-1px);
 }
 
-/* =============================
-   PRAWE KARTY (ADD / DETAILS / EDIT)
-============================= */
-
 .item2,
 .item3,
 .item4 {
@@ -100,7 +89,7 @@ body {
   color: #0f172a;
 }
 
-/* Pozycje grid */
+
 .item2 {
   grid-column: 2;
 }
@@ -114,10 +103,6 @@ body {
   grid-column: 2;
   border-left: 4px solid #10b981;
 }
-
-/* =============================
-   FORMULARZ W 2 KOLUMNACH
-============================= */
 
 .form-grid {
   display: grid;
@@ -165,18 +150,13 @@ button,
   font-size: 13px !important;
 }
 
-/* =============================
-   TEKST W KARTACH
-============================= */
 .item3 p,
 .item4 p {
   margin: 4px 0;
   font-size: 14px;
 }
 
-/* =============================
-   RESPONSYWNOŚĆ
-============================= */
+
 
 @media (max-width: 960px) {
   .grid-container {
